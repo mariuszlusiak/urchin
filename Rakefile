@@ -5,3 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 Smsee::Application.load_tasks
+
+task :install => ["db:create","db:migrate"]
+task :uninstall => ["db:drop"]
+task :reinstall => ["uninstall","install"]

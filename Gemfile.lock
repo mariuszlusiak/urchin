@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/binarylogic/authlogic.git
+  revision: 66ed79515919fe13016911b10ebe734cf8718dc7
+  specs:
+    authlogic (2.1.6)
+      activesupport
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -69,5 +76,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authlogic!
   mysql2
   rails (= 3.0.0)
