@@ -1,9 +1,13 @@
 Smsee::Application.routes.draw do
   resources :users
+  resources :user_sessions
   namespace :admin do resources :users end
 
   match 'register' => 'users#new'
   match 'signup' => 'users#new'
+
+  match 'logout' => 'user_sessions#destroy'
+  match 'login' => 'user_sessions#new'
 
 
   #namespace :admin do resources :users end
