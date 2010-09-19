@@ -2,6 +2,15 @@
 
 <table>
   <tr>
+    <th>Login</th>
+    <th>Email</th>
+    <th>Login count</th>
+    <th>Failed login count</th>
+    <th>Last request at</th>
+    <th>Current login at</th>
+    <th>Last login at</th>
+    <th>Current login ip</th>
+    <th>Last login ip</th>
     <th></th>
     <th></th>
     <th></th>
@@ -9,6 +18,15 @@
 
 <% @admin_users.each do |admin_user| %>
   <tr>
+    <td><%= admin_user.login %></td>
+    <td><%= admin_user.email %></td>
+    <td><%= admin_user.login_count %></td>
+    <td><%= admin_user.failed_login_count %></td>
+    <td><%= admin_user.last_request_at %></td>
+    <td><%= admin_user.current_login_at %></td>
+    <td><%= admin_user.last_login_at %></td>
+    <td><%= admin_user.current_login_ip %></td>
+    <td><%= admin_user.last_login_ip %></td>
     <td><%= link_to 'Show', admin_user %></td>
     <td><%= link_to 'Edit', edit_admin_user_path(admin_user) %></td>
     <td><%= link_to 'Destroy', admin_user, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -19,3 +37,4 @@
 <br />
 
 <%= link_to 'New User', new_admin_user_path %>
+

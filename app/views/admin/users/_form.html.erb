@@ -4,13 +4,57 @@
       <h2><%= pluralize(@admin_user.errors.count, "error") %> prohibited this admin_user from being saved:</h2>
 
       <ul>
-      <% @admin_user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @admin_user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :login_count %><br />
+    <%= f.text_field :login_count %>
+  </div>
+  <div class="field">
+    <%= f.label :failed_login_count %><br />
+    <%= f.text_field :failed_login_count %>
+  </div>
+  <div class="field">
+    <%= f.label :last_request_at %><br />
+    <%= f.datetime_select :last_request_at %>
+  </div>
+  <div class="field">
+    <%= f.label :current_login_at %><br />
+    <%= f.datetime_select :current_login_at %>
+  </div>
+  <div class="field">
+    <%= f.label :last_login_at %><br />
+    <%= f.datetime_select :last_login_at %>
+  </div>
+  <div class="field">
+    <%= f.label :current_login_ip %><br />
+    <%= f.text_field :current_login_ip %>
+  </div>
+  <div class="field">
+    <%= f.label :last_login_ip %><br />
+    <%= f.text_field :last_login_ip %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
