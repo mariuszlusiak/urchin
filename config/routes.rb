@@ -1,7 +1,22 @@
 Smsee::Application.routes.draw do
-  resources :users
+  namespace :admin do
+    resources :users do
+      resources :messages
+    end
+    resources :messages
+    resources :recipients
+  end
+
+  resources :users do
+    resources :messages
+  end
+
+  resources :recipients
+
   resources :user_sessions
-  namespace :admin do resources :users end
+
+  resources :messages
+
 
   match 'register' => 'users#new'
   match 'signup' => 'users#new'

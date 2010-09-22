@@ -1,4 +1,6 @@
 class UserSessionsController < ApplicationController
+  before_filter :require_user, :only => :destroy
+
   # GET /user_sessions/new
   # GET /user_sessions/new.xml
   def new
