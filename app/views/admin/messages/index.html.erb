@@ -1,0 +1,30 @@
+<h1>Listing admin_messages</h1>
+
+<table>
+  <tr>
+    <th>Text</th>
+    <th>ASCII</th>
+    <th>Sent at</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_messages.each do |admin_message| %>
+  <tr>
+    <td><%= admin_message.text %></td>
+    <td><%= admin_message.ascii %></td>
+    <td><%= admin_message.sent_at %></td>
+    <td><%= admin_message.user %></td>
+    <td><%= link_to 'Show', admin_message_path(admin_message) %></td>
+    <td><%= link_to 'Edit', edit_admin_message_path(admin_message) %></td>
+    
+    <td><%= link_to 'Destroy', admin_message_path(admin_message), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Message', new_admin_message_path %>

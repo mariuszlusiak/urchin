@@ -1,0 +1,33 @@
+<%= form_for(@admin_message) do |f| %>
+  <% if @admin_message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_message.errors.count, "error") %> prohibited this admin_message from being saved:</h2>
+
+      <ul>
+      <% @admin_message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :text %><br />
+    <%= f.text_field :text %>
+  </div>
+  <div class="field">
+    <%= f.label :ascii %><br />
+    <%= f.check_box :ascii %>
+  </div>
+  <div class="field">
+    <%= f.label :sent_at %><br />
+    <%= f.datetime_select :sent_at %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

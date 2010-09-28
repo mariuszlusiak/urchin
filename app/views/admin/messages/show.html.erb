@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Text:</b>
+  <%= @admin_message.text %>
+</p>
+
+<p>
+  <b>ASCII:</b>
+  <%= @admin_message.ascii %>
+</p>
+
+<p>
+  <b>Sent at:</b>
+  <%= @admin_message.sent_at %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @admin_message.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_message_path(@admin_message) %> |
+<%= link_to 'Back', admin_messages_path %>

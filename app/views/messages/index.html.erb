@@ -3,23 +3,16 @@
 <table>
   <tr>
     <th>Text</th>
-    <th>Encoding</th>
+    <th>ASCII</th>
     <th>Sent at</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @messages.each do |message| %>
   <tr>
     <td><%= message.text %></td>
-    <td><%= message.encoding %></td>
+    <td><%= message.ascii %></td>
     <td><%= message.sent_at %></td>
-    <td><%= message.user %></td>
-    <td><%= link_to 'Show', message %></td>
-    <td><%= link_to 'Edit', edit_message_path(message) %></td>
-    <td><%= link_to 'Destroy', message, :confirm => 'Are you sure?', :method => :delete %></td>
+
   </tr>
 <% end %>
 </table>

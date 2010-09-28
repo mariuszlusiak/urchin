@@ -6,6 +6,12 @@ require 'rake'
 
 Smsee::Application.load_tasks
 
+begin
+  require 'delayed/tasks'
+rescue LoadError
+  STDERR.puts "Run `bundle install` to install delayed_job"
+end
+
 task :install => ["db:create","db:migrate"]
 task :uninstall => ["db:drop"]
 task :reinstall => ["uninstall","install"]

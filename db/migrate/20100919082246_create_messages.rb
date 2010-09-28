@@ -2,12 +2,14 @@ class CreateMessages < ActiveRecord::Migration
   def self.up
     create_table :messages do |t|
       t.string :text
-      t.integer :encoding
-      t.datetime :sent_at
-      t.references :user
+      t.boolean :ascii
+      t.datetime :sent_at, null:false
+      t.references :user , null:false
 
       t.timestamps
     end
+
+    add_index :messages,:user_id
   end
 
   def self.down
