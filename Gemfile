@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
 gem "nifty-generators"
 gem 'delayed_job','2.1.0.pre2'
+#gem 'delayed_job','2.0.3'
 
 # Use unicorn as the web server
 # gem 'unicorn'

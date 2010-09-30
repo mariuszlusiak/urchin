@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  mobile_number: 1
+  message: 
+  received_at: 2010-09-19 12:27:30
+
+two:
+  mobile_number: 1
+  message: 
+  received_at: 2010-09-19 12:27:30

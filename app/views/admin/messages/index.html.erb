@@ -16,7 +16,7 @@
     <td><%= admin_message.text %></td>
     <td><%= admin_message.ascii %></td>
     <td><%= admin_message.sent_at %></td>
-    <td><%= admin_message.user %></td>
+    <td><%= admin_message.user.login %></td>
     <td><%= link_to 'Show', admin_message_path(admin_message) %></td>
     <td><%= link_to 'Edit', edit_admin_message_path(admin_message) %></td>
     

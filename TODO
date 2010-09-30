@@ -1,0 +1,12 @@
+TODO:
+
+- Install activerecord-import plugin (performance improvement while importing recipients)
+- use Resque instead of DelayedJob because:
+    We need multiple queues
+    We don't care / dislike numeric priorities
+    We don't need to persist every Ruby object ever
+    We have potentially huge queues
+    We want to see what's going on
+    We expect a lot of failure / chaos
+    We can setup Redis
+    We're not running short on RAM
