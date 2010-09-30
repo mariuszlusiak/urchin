@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100922113321) do
+ActiveRecord::Schema.define(:version => 20100930144602) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -38,12 +38,28 @@ ActiveRecord::Schema.define(:version => 20100922113321) do
 
   add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
+  create_table "packages", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "day_limit"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "recipients", :force => true do |t|
     t.string   "mobile_number", :null => false
     t.string   "response"
     t.integer  "message_id",    :null => false
     t.datetime "sent_at"
     t.datetime "received_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "package_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

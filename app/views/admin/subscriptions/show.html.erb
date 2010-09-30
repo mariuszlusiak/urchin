@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Package:</b>
+  <%= @admin_subscription.package %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @admin_subscription.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_subscription_path(@admin_subscription) %> |
+<%= link_to 'Back', admin_subscriptions_path %>
