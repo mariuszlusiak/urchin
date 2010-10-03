@@ -1,4 +1,12 @@
-<%= form_for(@admin_user,:url => {controller:'admin/users'}) do |f| %>
+<%
+if @admin_user.id
+  url = "#{admin_user_path(@admin_user)}"
+else
+  url = "#{admin_users_path}"
+end
+%>
+
+<%= form_for(@admin_user,:url => url) do |f| %>
   <% if @admin_user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_user.errors.count, "error") %> prohibited this admin_user from being saved:</h2>

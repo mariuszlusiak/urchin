@@ -1,4 +1,12 @@
-<%= form_for(@admin_message,:url => {controller:'admin/messages'}) do |f| %>
+<%
+if @admin_message.id
+  url = "#{admin_message_path(@admin_message)}"
+else
+  url = "#{admin_messages_path}"
+end
+%>
+
+<%= form_for(@admin_message,:url => url) do |f| %>
   <% if @admin_message.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@admin_message.errors.count, "error") %> prohibited this admin_message from being saved:</h2>
@@ -24,8 +32,8 @@
     <%= f.datetime_select :sent_at %>
   </div>
   <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,15 +1,5 @@
 Smsee::Application.routes.draw do
 
-  resources :recipients
-
-  resources :user_sessions
-
-  resources :messages
-
-  resources :users do
-    resources :messages
-  end
-
   namespace :admin do
     resources :users do
       resources :messages
@@ -22,12 +12,26 @@ Smsee::Application.routes.draw do
     resources :recipients
   end
 
+  resources :recipients
+
+  resources :user_sessions
+
+  resources :messages
+
+  resources :subscriptions
+
+  resources :users do
+    resources :subscriptions
+    resources :messages
+  end
   
   match 'register' => 'users#new'
   match 'signup' => 'users#new'
 
   match 'logout' => 'user_sessions#destroy'
   match 'login' => 'user_sessions#new'
+
+  match 'new' => 'messages#new'
 
 
   #namespace :admin do resources :users end

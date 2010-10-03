@@ -40,11 +40,11 @@ class Admin::MessagesController < ApplicationController
   # POST /admin/messages
   # POST /admin/messages.xml
   def create
-    @admin_message = Message.new(params[:admin_message])
+    @admin_message = Message.new(params[:message])
 
     respond_to do |format|
       if @admin_message.save
-        format.html { redirect_to(@admin_message, :notice => 'Message was successfully created.') }
+        format.html { redirect_to(admin_message_path(@admin_message), :notice => 'Message was successfully created.') }
         format.xml  { render :xml => @admin_message, :status => :created, :location => @admin_message }
       else
         format.html { render :action => "new" }
@@ -59,8 +59,8 @@ class Admin::MessagesController < ApplicationController
     @admin_message = Message.find(params[:id])
 
     respond_to do |format|
-      if @admin_message.update_attributes(params[:admin_message])
-        format.html { redirect_to(@admin_message, :notice => 'Message was successfully updated.') }
+      if @admin_message.update_attributes(params[:message])
+        format.html { redirect_to(admin_message_path(@admin_message), :notice => 'Message was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

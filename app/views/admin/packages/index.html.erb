@@ -1,0 +1,29 @@
+<h1>Listing admin_packages</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Day limit</th>
+    <th>Amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_packages.each do |admin_package| %>
+  <tr>
+    <td><%= admin_package.name %></td>
+    <td><%= admin_package.description %></td>
+    <td><%= admin_package.day_limit %></td>
+    <td><%= admin_package.amount %></td>
+    <td><%= link_to 'Show', admin_package_path(admin_package) %></td>
+    <td><%= link_to 'Edit', edit_admin_package_path(admin_package) %></td>
+    <td><%= link_to 'Destroy', admin_package_path(admin_package), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Package', new_admin_package_path %>
