@@ -12,6 +12,12 @@ Smsee::Application.routes.draw do
     resources :recipients
   end
 
+  resources :users do
+    resources :subscriptions
+    resources :messages
+    resources :packages
+  end
+
   resources :recipients
 
   resources :user_sessions
@@ -20,10 +26,7 @@ Smsee::Application.routes.draw do
 
   resources :subscriptions
 
-  resources :users do
-    resources :subscriptions
-    resources :messages
-  end
+  
   
   match 'register' => 'users#new'
   match 'signup' => 'users#new'

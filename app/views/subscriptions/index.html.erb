@@ -3,16 +3,20 @@
 <table>
   <tr>
     <th>Package</th>
-    <th>User</th>
-    <th></th>
+    <th>Description</th>
+    <th>Day Limit</th>
+    <th>Amount</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @subscriptions.each do |subscription| %>
   <tr>
-    <td><%= subscription.package %></td>
-    <td><%= subscription.user %></td>
+
+     <td><%= subscription.package.name %></td>
+    <td><%= subscription.package.description %></td>
+    <td><%= subscription.package.day_limit %></td>
+    <td><%= subscription.package.amount %></td>
     <td><%= link_to 'Show', subscription %></td>
     <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
     <td><%= link_to 'Destroy', subscription, :confirm => 'Are you sure?', :method => :delete %></td>
