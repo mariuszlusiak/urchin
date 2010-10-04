@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +30,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   # POST /users

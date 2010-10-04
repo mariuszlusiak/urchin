@@ -17,6 +17,8 @@ Smsee::Application.routes.draw do
     resources :messages
     resources :packages
   end
+  
+  resource :profile, :controller => 'users'
 
   resources :recipients
 
@@ -27,7 +29,9 @@ Smsee::Application.routes.draw do
   resources :subscriptions
 
   
+
   
+  match 'profile' => 'users#show'
   match 'register' => 'users#new'
   match 'signup' => 'users#new'
 
