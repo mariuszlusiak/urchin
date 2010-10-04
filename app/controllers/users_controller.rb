@@ -56,7 +56,11 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

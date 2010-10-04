@@ -19,7 +19,7 @@ class Message < ActiveRecord::Base
   end
   
   def amount_limit
-    errors.add_to_base("Sorry, you are out of your messages limit.") if going_messages > user.amount_limit
+    errors.add_to_base("Sorry, you are out of your total messages limit.") if going_messages > user.amount_limit
   end
   
   # If your strings are Unicode (and they really should be, nowadays),
