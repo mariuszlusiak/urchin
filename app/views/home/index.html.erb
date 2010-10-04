@@ -5,6 +5,7 @@
 <div>You can send  <%= current_user.today_limit   %> messages for today, and you have <%= current_user.amount_limit  %> Messages </div>
 <div><%= link_to 'Send message', new_path %></div>
 <div><%= link_to 'Profile Management', edit_profile_path %></div>
+<div><%= link_to 'Show Profile', profile_path %></div>
 <div><%= link_to 'Logout',logout_path %></div>
 <%else%>
 <div><%= link_to 'Send message', new_path %></div>
