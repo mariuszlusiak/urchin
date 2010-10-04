@@ -1,10 +1,14 @@
 <p id="notice"><%= notice %></p>
-<h1>Home Page</h1>
-<div>I can send  <%= current_user.today_limit  %> messages per day</div>
-<div>I have <%= current_user.total_limit %> Messages </div>
-<div><%= link_to 'Signup',signup_path %></div>
-<div><%= link_to 'User Management', admin_users_path %></div>
-<div><%= link_to 'Send message', new_message_path %></div>
 
-<div><%= link_to 'Login',login_path %></div>
+
+<% if current_user %>
+<div>You can send  <%= current_user.today_limit   %> messages for today, and you have <%= current_user.amount_limit  %> Messages </div>
+<div><%= link_to 'Send message', new_message_path %></div>
+<div><%= link_to 'User Management', admin_users_path %></div>
 <div><%= link_to 'Logout',logout_path %></div>
+<%else%>
+<div><%= link_to 'Send message', new_message_path %></div>
+<div><%= link_to 'Login',login_path %></div>
+<div><%= link_to 'Signup',signup_path %></div>
+<%end%>
+

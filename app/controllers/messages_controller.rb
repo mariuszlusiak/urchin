@@ -39,7 +39,7 @@ class MessagesController < ApplicationController
     
     respond_to do |format|
       if @message.save
-        format.html { redirect_to(messages_url, :notice => 'Message was successfully sent.') }
+        format.html { redirect_to(new_url, :notice => 'Message was successfully sent.') }
         format.xml  { render :xml => @message, :status => :created, :location => @message }
       else
         format.html { render :action => "new" }
