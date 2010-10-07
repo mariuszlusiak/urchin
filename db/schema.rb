@@ -43,14 +43,16 @@ ActiveRecord::Schema.define(:version => 20101003203143) do
     t.text     "description"
     t.integer  "day_limit"
     t.integer  "amount"
+    t.integer  "validity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "recipients", :force => true do |t|
-    t.string   "mobile_number", :null => false
+    t.string   "mobile_number",   :null => false
     t.string   "response"
-    t.integer  "message_id",    :null => false
+    t.integer  "message_id",      :null => false
+    t.integer  "subscription_id", :null => false
     t.datetime "sent_at"
     t.datetime "received_at"
     t.datetime "created_at"
@@ -68,11 +70,14 @@ ActiveRecord::Schema.define(:version => 20101003203143) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "subscriptions", :force => true do |t|
-    t.integer  "package_id"
-    t.integer  "user_id"
+    t.integer  "package_id", :null => false
+    t.integer  "user_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "subscriptions", ["package_id"], :name => "index_subscriptions_on_package_id"
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                               :null => false

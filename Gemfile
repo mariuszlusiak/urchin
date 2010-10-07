@@ -6,6 +6,7 @@ gem 'rails', '3.0.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'foreigner'
 gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
 gem "nifty-generators"
 gem 'delayed_job','2.1.0.pre2'

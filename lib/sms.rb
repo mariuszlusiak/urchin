@@ -2,9 +2,9 @@ require 'net/http'
 
 class Sms
   # Default Sender is me just for test
-  def initialize(message,sender = 'INet')
+  def initialize(message)
     @message = message
-    @sender =  sender
+    @sender =  message.user.login
     put_in_the_queue
   end
 

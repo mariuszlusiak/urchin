@@ -6,6 +6,7 @@
     <th>Description</th>
     <th>Day limit</th>
     <th>Amount</th>
+    <th>Validity</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= admin_package.description %></td>
     <td><%= admin_package.day_limit %></td>
     <td><%= admin_package.amount %></td>
+    <td><%= admin_package.validity %></td>
     <td><%= link_to 'Show', admin_package_path(admin_package) %></td>
     <td><%= link_to 'Edit', edit_admin_package_path(admin_package) %></td>
     <td><%= link_to 'Destroy', admin_package_path(admin_package), :confirm => 'Are you sure?', :method => :delete %></td>

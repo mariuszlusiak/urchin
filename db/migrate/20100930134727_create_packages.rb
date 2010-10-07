@@ -5,6 +5,7 @@ class CreatePackages < ActiveRecord::Migration
       t.text :description
       t.integer :day_limit
       t.integer :amount
+      t.integer :validity
 
       t.timestamps
     end

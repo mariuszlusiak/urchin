@@ -2,7 +2,7 @@ class MessageObserver < ActiveRecord::Observer
   require 'sms'
 
   def after_create(message)
-    Sms.new(message,message.user.login)
+    Sms.new(message)
   end
 
   # if Message text is only ASCII: return true else return false

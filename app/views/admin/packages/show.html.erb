@@ -20,6 +20,13 @@
   <%= @admin_package.amount %>
 </p>
 
+<p>
+  <b>Validity:</b>
+  <%= @admin_package.validity %>
+</p>
+
+
+
 
 <%= link_to 'Edit', edit_admin_package_path(@admin_package) %> |
 <%= link_to 'Back', admin_packages_path %>

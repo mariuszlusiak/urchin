@@ -3,7 +3,8 @@ class CreateRecipients < ActiveRecord::Migration
     create_table :recipients do |t|
       t.string :mobile_number,  null:false
       t.string :response
-      t.references :message,    null:false
+      t.references :message, :foreign_key => true, null:false
+      t.references :subscription, :foreign_key => true, null:false
       t.datetime :sent_at
       t.datetime :received_at
 
