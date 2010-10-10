@@ -18,6 +18,10 @@ class Subscription < ActiveRecord::Base
     package.day_limit
   end
 
+  def amount_limit
+    package.amount
+  end
+
   # Return the rest messages limit for today for this subscription
   def today_limit
     package.day_limit - sent_messages_for_today

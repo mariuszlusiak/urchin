@@ -1,0 +1,33 @@
+<%
+if @admin_subscription.id
+  url = "#{admin_subscription_path(@admin_subscription)}"
+else
+  url = "#{admin_subscriptions_path}"
+end
+%>
+
+<%= form_for(@admin_subscription,:url => url) do |f| %>
+  <% if @admin_subscription.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_subscription.errors.count, "error") %> prohibited this admin_subscription from being saved:</h2>
+
+      <ul>
+      <% @admin_subscription.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :package %><br />
+    <%= f.text_field :package %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

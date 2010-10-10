@@ -1,0 +1,45 @@
+<%
+if @admin_package.id
+  url = "#{admin_package_path(@admin_package)}"
+else
+  url = "#{admin_packages_path}"
+end
+%>
+
+<%= form_for(@admin_package,:url => url) do |f| %>
+  <% if @admin_package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_package.errors.count, "error") %> prohibited this admin_package from being saved:</h2>
+
+      <ul>
+      <% @admin_package.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :day_limit %><br />
+    <%= f.text_field :day_limit %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :validity %><br />
+    <%= f.text_field :validity %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
