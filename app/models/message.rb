@@ -6,6 +6,7 @@ class Message < ActiveRecord::Base
   validates :user_id, presence:true 
   validates :recipients, presence:true
   validates :text, presence:true
+  validates :sender, presence:true
   validate  :today_limit
   validate  :amount_limit
 

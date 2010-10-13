@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Login</th>
+    <th>Sender ID</th>
     <th>Email</th>
     <th>Login count</th>
     <th>Failed login count</th>
@@ -19,6 +20,7 @@
 <% @admin_users.each do |admin_user| %>
   <tr>
     <td><%= admin_user.login %></td>
+    <td><%= admin_user.sender %></td>
     <td><%= admin_user.email %></td>
     <td><%= admin_user.login_count %></td>
     <td><%= admin_user.failed_login_count %></td>

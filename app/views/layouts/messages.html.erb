@@ -7,31 +7,6 @@
     <%= javascript_include_tag :defaults %>
     <%= csrf_meta_tag %>
     
-    <mscript type="text/javascript" src="//www.google.com/jsapi"></script>
-    <script type="text/javascript">
-
-      google.load("language", "1");
-
-      function initialize() {
-        var text = document.getElementById("message_text").value;
-        google.language.detect(text, function(result) {
-          if (!result.error) {
-            var language = 'unknown';
-            for (l in google.language.Languages) {
-              if (google.language.Languages[l] == result.language) {
-                language = l;
-                break;
-              }
-            }
-            var container = document.getElementById("message_encoding");
-            container.value = language
-          }
-        });
-      }
-      //google.setOnLoadCallback(initialize);
-
-
-    </script>
   </head>
   <body>
     <p id="notice"><%= notice %></p>

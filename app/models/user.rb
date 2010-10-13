@@ -7,10 +7,11 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
   validates :name, presence:true
+  validates :sender, presence:true #TODO add regex validation
 
   # Returns the number of sent messages by this user for today
   def sent_messages_for_today
-    recipients.where('recipients.created_at >= ? ', Date.today.beginning_of_day).count
+    recipients.where('messages.created_at >= ? ', Date.today.beginning_of_day).count
   end
 
   # Returns the number of sent messages by this user for all the time

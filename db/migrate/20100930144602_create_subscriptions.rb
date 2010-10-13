@@ -1,8 +1,8 @@
 class CreateSubscriptions < ActiveRecord::Migration
   def self.up
     create_table :subscriptions do |t|
-      t.references :package, :foreign_key => {:dependent => :delete},  null:false
-      t.references :user, :foreign_key => {:dependent => :delete},  null:false
+      t.references :package,  null:false
+      t.references :user,  null:false
 
       t.timestamps
     end

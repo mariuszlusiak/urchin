@@ -12,6 +12,7 @@ gem "nifty-generators"
 gem 'delayed_job','2.1.0.pre2'
 
 group :development, :test do
+  gem 'rails-erd'
   gem 'ruby-debug19'
 end
 #gem 'delayed_job','2.0.3'

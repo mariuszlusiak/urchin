@@ -10,17 +10,16 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
     <%= f.label :text %><br />
-    <%= f.text_area :text , :onkeyup => 'initialize()'%>
+    <%= f.text_area :text , :onkeyup => 'return taCount(this,"myCounter")' , :onkeypress => 'return taLimit(this)'%>
   </div>
   <div class="field">
     <%= f.label :to %><br />
     <%= text_field :recipients,:mobile_numbers %>
     
   </div>
-
   <div class="actions">
     <%= f.submit 'Send' %>
   </div>

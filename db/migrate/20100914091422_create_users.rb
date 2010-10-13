@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :name,                null:false                # optional, Just to store the full name
       t.string    :login,               null:false                # optional, you can use email instead, or both
       t.string    :email,               null:false                # optional, you can use login instead, or both
+      t.string    :sender,           null:false                # optional
       t.string    :crypted_password,    null:false                # optional, see below
       t.string    :password_salt,       null:false                # optional, but highly recommended
       t.string    :persistence_token,   null:false                # required

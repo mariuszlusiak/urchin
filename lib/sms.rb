@@ -4,7 +4,7 @@ class Sms
   # Default Sender is me just for test
   def initialize(message)
     @message = message
-    @sender =  message.user.login
+    @sender =  message.sender # add the sender ID
     put_in_the_queue
   end
 
@@ -23,7 +23,7 @@ class Sms
 
     begin
     recipient.response = response.body
-    recipient.sent_at = Time.now
+    recipient.sent_at = Time.zone.now
     recipient.save
     # Logging
     log = "Message [#{
@@ -42,16 +42,15 @@ class Sms
     end
   end
 
+  # Convert UTF-8 Message text to HEX formatted in 4 digits
   def as_unicode
-    # UTF-8, HEX format with 4 digits
     a=[];@message.text.unpack('U*').each{|c| a << sprintf("%04x",c)};a.join
   end
-
+ # Convert Message to URI encoding
   def as_ascii
-    # Convert to URI encoding
     CGI::escape(@message.text)
   end
-  
+
   def put_in_the_queue
     # Choose the encoding type
     @message.ascii ? (msg,mt = as_ascii,0) : (msg,mt = as_unicode,1)

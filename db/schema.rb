@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20101003203143) do
 
   create_table "messages", :force => true do |t|
     t.string   "text"
+    t.string   "sender",     :null => false
     t.boolean  "ascii"
-    t.datetime "sent_at",    :null => false
     t.integer  "user_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20101003203143) do
     t.string   "name",                               :null => false
     t.string   "login",                              :null => false
     t.string   "email",                              :null => false
+    t.string   "sender",                             :null => false
     t.string   "crypted_password",                   :null => false
     t.string   "password_salt",                      :null => false
     t.string   "persistence_token",                  :null => false
