@@ -18,17 +18,30 @@ function is_ascii(taObj){
 }
 
 var bName = navigator.appName;
-function taLimit(taObj) {
-    is_ascii(taObj) ? limit = asciiLimit : limit = unicodeLimit
-    if (taObj.value.length==limit) return false;
-    return true;
-}
+//function taLimit(taObj) {
+//    is_ascii(taObj) ? limit = asciiLimit : limit = unicodeLimit
+//    if (taObj.value.length==limit) return false;
+//    return true;
+//}
 
 function taCount(taObj,Cnt) {
     objCnt=createObject(Cnt);
     objVal=taObj.value;
+
     is_ascii(taObj) ? limit = asciiLimit : limit = unicodeLimit
-    if (objVal.length>limit) objVal=objVal.substring(0,limit);
+    ta =  document.getElementById('message_text')
+    sm = document.getElementById('message_submit')
+    if (objVal.length > limit){
+        sm.disabled = true;
+        objCnt.style.color = '#FF0000';
+        ta.style.backgroundColor = '#FF4F4F'; // Red
+    }else{
+        sm.disabled = false;
+        objCnt.style.color = '#000000';
+        ta.style.backgroundColor = '#FFFFFF'; // White
+    }
+    
+    //if (objVal.length>limit) objVal=objVal.substring(0,limit);
     if (objCnt) {
         if(bName == "Netscape"){
             objCnt.textContent=limit-objVal.length;
@@ -37,12 +50,7 @@ function taCount(taObj,Cnt) {
             objCnt.innerText=limit-objVal.length;
         }
     }
-    ta =  document.getElementById("message_text")
-    if (limit-objVal.length <= 0){
-        ta.style.backgroundColor = '#FF4F4F' // Red
-    }else{
-        ta.style.backgroundColor = '#FFFFFF' // White
-    }
+    
     return true;
 }
 

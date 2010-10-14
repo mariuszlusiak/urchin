@@ -31,7 +31,7 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     @message.user_id = current_user.id #FIXME check if current_user is nil, could be nil!!
     #Split after commas and spaces
-    params[:recipients][:mobile_numbers].split(/\,+\s*|\s+/).each do |number|
+    params[:recipients][:mobile_numbers].split(/\,+\s*|\s+/).compact.each do |number|
       @message.recipients << Recipient.new(:mobile_number => number)
     end
 

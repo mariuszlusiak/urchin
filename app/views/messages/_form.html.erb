@@ -4,21 +4,29 @@
       <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
 
       <ul>
-      <% @message.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @message.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
     <%= f.label :text %><br />
-    <%= f.text_area :text , :onkeyup => 'return taCount(this,"myCounter")' , :onkeypress => 'return taLimit(this)'%>
+    <%= f.text_area :text , :onkeyup => 'return taCount(this,"myCounter")'%>
   </div>
   <div class="field">
-    <%= f.label :to %><br />
-    <%= text_field :recipients,:mobile_numbers %>
-    
+    <%= f.label :mobile_number %><br />
+  <%#   text_field(:snippet, :code, :size => 20, :class => 'code_input')%>
+    <%
+    value = ''
+    @message.recipients.each do |recipient|
+      value += recipient.mobile_number + ','
+    end
+  %>
+    <%= text_field :recipients,:mobile_numbers,:value => value %>
+  <%#= f.text_field :recipients,:class => ':mobile_number_input' %>
+
   </div>
   <div class="actions">
     <%= f.submit 'Send' %>

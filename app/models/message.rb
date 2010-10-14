@@ -9,12 +9,25 @@ class Message < ActiveRecord::Base
   validates :sender, presence:true
   validate  :today_limit
   validate  :amount_limit
+  validate :valid_mobile_numbers?
+
+  def valid_mobile_numbers?
+    recipients.each do |recipient|
+      unless recipient.mobile_number.match(/^\d+$/)
+        errors.add_to_base("#{recipient.mobile_number} is invalid mobile number")
+      end
+    end
+  end
+
+
 
   # Returns the number of the messages would be sent
   def going_messages
     recipients.map(&:id).count
   end
-  
+
+  # Validation methods
+
   def today_limit
     errors.add_to_base("Sorry, you are out of your daly limit.") if going_messages > user.today_limit
   end

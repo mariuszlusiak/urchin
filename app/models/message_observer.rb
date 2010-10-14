@@ -6,6 +6,10 @@ class MessageObserver < ActiveRecord::Observer
     message.sender  = message.user.sender
   end
 
+#  def after_validation(message)
+#    message.errors.add(:recipients, :message => 'your message')
+#  end
+
   def before_save(message)
     #message.force_encoding("UTF-8").ascii_only? ? message.encoding = 'ASCII' : message.encoding = 'UNICODE'
     # if Message text is only ASCII: return true else return false
