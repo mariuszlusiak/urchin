@@ -10,6 +10,23 @@ class Message < ActiveRecord::Base
   validate  :today_limit
   validate  :amount_limit
   validate :valid_mobile_numbers?
+  validate :message_length
+
+  # Returns the number of the messages would be sent
+  def going_messages
+    recipients.map(&:id).count
+  end
+
+  # Validation methods
+
+  #TODO need optimization user Global variables instead numbers in a configuration file
+  def message_length
+    if ascii
+      errors.add_to_base("Sorry long message, should be less than 160 characters.") if text.length > 160
+    else
+      errors.add_to_base("Sorry long message, should be less than 70 characters.") if text.length > 70
+    end
+  end
 
   def valid_mobile_numbers?
     recipients.each do |recipient|
@@ -18,15 +35,6 @@ class Message < ActiveRecord::Base
       end
     end
   end
-
-
-
-  # Returns the number of the messages would be sent
-  def going_messages
-    recipients.map(&:id).count
-  end
-
-  # Validation methods
 
   def today_limit
     errors.add_to_base("Sorry, you are out of your daly limit.") if going_messages > user.today_limit

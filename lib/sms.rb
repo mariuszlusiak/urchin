@@ -17,26 +17,25 @@ class Sms
   def http_send(host,path,recipient)
     # You can rise error here, if you want to keep the message in the queue
     #raise "Error Message wa wa wa wa hoh hoh oh ho"
-    
     # sending the message by HTTP
     response = Net::HTTP.get_response(host, path)
-
-    begin
-    recipient.response = response.body
-    recipient.sent_at = Time.zone.now
-    recipient.save
-    # Logging
-    log = "Message [#{
-    @message.id}]:\n\tSender id: #{
-    @message.user_id}\n\tSender Name: #{
-    @sender}\n\tText: \"#{
-    @message.text}\"\n\tEnglish(ASCII): #{
-    @message.ascii}\n\tSent at: #{
-    @message.sent_at}\n\tRespone:\n\t\tBody: #{response.body}\n\t\tCode: #{response.code}\n"
-    message_logger.info(log)
     
-    #message_logger.info("http://"+host+path)
-    #message_logger.info(@message.to_yaml + response.to_yaml + @sender.to_yaml + "\n")# Log recored
+    begin
+      recipient.response = response.body
+      recipient.sent_at = Time.zone.now
+      recipient.save
+      # Logging
+      log = "Message [#{
+      @message.id}]:\n\tSender id: #{
+      @message.user_id}\n\tSender Name: #{
+      @sender}\n\tText: \"#{
+      @message.text}\"\n\tEnglish(ASCII): #{
+      @message.ascii}\n\tSent at: #{
+      @message.sent_at}\n\tRespone:\n\t\tBody: #{response.body}\n\t\tCode: #{response.code}\n"
+      message_logger.info(log)
+    
+      #message_logger.info("http://"+host+path)
+      #message_logger.info(@message.to_yaml + response.to_yaml + @sender.to_yaml + "\n")# Log recored
     rescue Exception => e
       message_logger.error(e.message + '/n' + e.backtrace.inspect)
     end
@@ -46,7 +45,7 @@ class Sms
   def as_unicode
     a=[];@message.text.unpack('U*').each{|c| a << sprintf("%04x",c)};a.join
   end
- # Convert Message to URI encoding
+  # Convert Message to URI encoding
   def as_ascii
     CGI::escape(@message.text)
   end
