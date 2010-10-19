@@ -8,9 +8,10 @@ gem 'rails', '3.0.0'
 gem 'mysql2'
 gem 'foreigner'
 gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
-gem "nifty-generators"
+gem 'nifty-generators'
 gem 'delayed_job','2.1.0.pre2'
-
+gem 'resque','1.11.0' ,:git => 'http://github.com/defunkt/resque.git', :require => 'resque/server'
+gem 'resque-forker'
 group :development, :test do
   gem 'rails-erd'
   gem 'ruby-debug19'
