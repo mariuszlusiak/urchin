@@ -12,6 +12,7 @@ gem 'nifty-generators'
 gem 'delayed_job','2.1.0.pre2'
 gem 'resque','1.11.0' ,:git => 'http://github.com/defunkt/resque.git', :require => 'resque/server'
 gem 'resque-forker'
+gem 'resque-retry'
 
 group :development, :test do
   gem 'rails-erd'

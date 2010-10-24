@@ -4,6 +4,7 @@ class CreateMessages < ActiveRecord::Migration
       t.string :text
       t.string :sender, null:false
       t.boolean :ascii
+      t.integer :unit, null:false
       t.references :user , null:false
 
       t.timestamps

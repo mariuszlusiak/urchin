@@ -2,6 +2,21 @@ require 'net/http'
 
 # This class would be perform by Resque Workers
 class Msg
+  extend Resque::Plugins::ExponentialBackoff
+
+
+  # the Message will go to this queue if it failed
+  @queue = :retry_queue
+
+  # Retry Specific Exceptions
+  # only retry if a SocketError (or subclass) exception is thrown.
+  @retry_exceptions = [SocketError]
+
+  # The first delay will be 0 seconds, the 2nd will be 60 seconds, etc... Again, tweak to your own needs.
+  # The number if retries is equal to the size of the backoff_strategy array, unless you set retry_limit yourself.
+  #             no delay, 1m, 10m,   1h,    3h,    6h
+  @backoff_strategy = [0, 60, 600, 3600, 10800, 21600]
+  
   
   # Touch the link :) and add log it
   def self.perform(message_id,sender,host, path, recipient_id)
@@ -54,11 +69,6 @@ class Sms
     enqueue
   end
 
-#  # Create message.log file and message_logger if it wasn't exist before
-#  def message_logger
-#    @@message_logger ||= Logger.new("#{Rails.root}/log/message.log")
-#  end
-
   # Convert UTF-8 Message text to HEX formatted in 4 digits
   def as_unicode
     a=[];@message.text.unpack('U*').each{|c| a << sprintf("%04x",c)};a.join
@@ -76,7 +86,7 @@ class Sms
     # Choose the encoding type
     @message.ascii ? (msg,mt = as_ascii,0) : (msg,mt = as_unicode,1)
 
-    # Create Queue Name
+    # Create Queue Name using user id
     queue = 'user_' + @message.user.id.to_s
 
     # Iterates on each number in the array

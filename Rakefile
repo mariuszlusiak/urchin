@@ -19,9 +19,10 @@ rescue
   STDERR.puts "Run `bundle install` to install resque"
 end
 
-task :amer => :environment do
-  puts Msg.method_names()
-  
+begin
+  require 'resque_scheduler/tasks'
+rescue
+  STDERR.puts "Run `bundle install` to install resque-retry"
 end
 
 task "resque:setup" => :environment do

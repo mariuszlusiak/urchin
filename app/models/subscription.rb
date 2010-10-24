@@ -2,6 +2,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :package
   belongs_to :user
   has_many :recipients
+  has_many :messages ,:through => :user
   #TODO add status and expiry date
 
   validates :package, presence:true

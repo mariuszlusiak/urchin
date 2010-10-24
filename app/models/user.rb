@@ -9,12 +9,17 @@ class User < ActiveRecord::Base
   validates :name, presence:true
   validates :sender, presence:true #TODO add regex validation
 
-  #TODO use Rails query syntax 
-  def last_less_subscriptions
-    #subscriptions.order('subscriptions.created_at DESC')
-    Subscription.find_by_sql("SELECT  `subscriptions`.*, DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) as end_date
-     FROM  `subscriptions`  INNER JOIN `packages` ON `packages`.`id` = `subscriptions`.`package_id`
-    order by end_date;")
+  #TODO Use Rails query syntax
+  #TODO Improve the query it self
+  #TODO Need text so badly
+  def valid_and_ordered_by_last_less_subscriptions
+    Subscription.find_by_sql(
+    "SELECT  `subscriptions`.*,DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) as end_date
+    FROM  `subscriptions` 
+    INNER JOIN `packages` ON `packages`.`id` = `subscriptions`.`package_id`
+    WHERE DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) >= '#{Time.zone.now}'
+    AND `subscriptions`.`user_id` = #{id}
+    ORDER BY end_date;")
   end
 
   # Returns the number of sent messages by this user for today
@@ -22,10 +27,24 @@ class User < ActiveRecord::Base
     recipients.where('messages.created_at >= ? ', Date.today.beginning_of_day).count
   end
 
-  # Returns the number of sent messages by this user for all the time
-  #TODO it must be only the valid (unexpired) subscriptions for this user
-  def sent_messages_number
-    recipients.count
+  # Returns the number of sent messages by this user for valid subscriptions only
+  #TODO Could done by SQL only to be more faster
+  #TODO make unit test for this function
+  #TODO Need text so badly
+  # Algorithm
+  # - bring valid subscriptions
+  # - bring the messages for each subscriptions through user
+  # - count the number of recipient of each message and multiplex it with same message unit
+  # - return the total.
+  # could be like valid_and_ordered_by_last_less_subscriptions.each {|s| s.messages.uniq.each {|m| p m.recipients.count * m.unit}}
+  def sent_messages_count
+    number_of_messages = 0
+    valid_and_ordered_by_last_less_subscriptions.each do |subscription|
+       subscription.messages.each do |message|
+         number_of_messages += message.recipients.count * message.unit
+       end
+    end
+    return number_of_messages
   end
 
   # Returns the fixed Day limit, this function add all day limits for this user
@@ -38,7 +57,7 @@ class User < ActiveRecord::Base
   # Returns total amount limit for this user
   def amount_limit
     #TODO it must be only the valid (unexpired) subscriptions for this user
-    packages.map(&:amount).sum - sent_messages_number
+    packages.map(&:amount).sum - sent_messages_count
   end
 
   # Returns the final limit for today by counting sent messages for today

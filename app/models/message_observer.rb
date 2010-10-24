@@ -6,6 +6,7 @@ class MessageObserver < ActiveRecord::Observer
   def before_validation(message)
     message.sender  = message.user.sender
     message.ascii = message.is_ascii?
+    message.unit = message.number_of_units
   end
 
   # Create new SMS Object to send the message. See lib/sms.rb

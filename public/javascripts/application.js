@@ -4,8 +4,8 @@
  * DHTML textbox character counter script. Courtesy of SmartWebby.com (http://www.smartwebby.com/dhtml/)
  */
 
-asciiLimit=160;
-unicodeLimit=70;
+asciiLimit=320;
+unicodeLimit=140;
 
 function is_ascii(taObj){
     value = taObj.value
@@ -25,16 +25,20 @@ var bName = navigator.appName;
 //}
 
 function taCount(taObj,Cnt) {
-    objCnt=createObject(Cnt);
-    objVal=taObj.value;
+    objCnt=createObject(Cnt)  ;
+    objVal=taObj.value ;
 
     is_ascii(taObj) ? limit = asciiLimit : limit = unicodeLimit
     ta =  document.getElementById('message_text')
     sm = document.getElementById('message_submit')
-    if (objVal.length > limit){
+    if(objVal.length > limit){
         sm.disabled = true;
         objCnt.style.color = '#FF0000';
         ta.style.backgroundColor = '#FF4F4F'; // Red
+    }else if(objVal.length > (limit/2)){
+        sm.disabled = false;
+        objCnt.style.color = '#008000';
+        ta.style.backgroundColor = '#A7F2A7'; // White
     }else{
         sm.disabled = false;
         objCnt.style.color = '#000000';

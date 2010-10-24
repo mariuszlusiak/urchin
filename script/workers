@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# If using Bundler, you might need to uncomment next two lines
+require "bundler"
+Bundler.setup
+require "resque/forker"
+
+# Load the application.
+Resque.setup do |forker|
+  $:.unshift File.dirname(__FILE__) + "/.." # Makes 1.9.2 happy
+  require "config/environment"
+  ActiveRecord::Base.connection.disconnect!
+  forker.options.interval = 1
+  if Rails.env.production?
+    forker.logger = Rails.logger
+    forker.workload = ["*"] * 4        # 4 workers on all queues
+    forker.user "www-data", "www-data" # don't run as root
+  elsif Rails.env.development?
+    forker.logger = Rails.logger
+    forker.workload = ["*"] * 4        # 4 workers on all queues
+  else
+    forker.options.verbose = true
+  end
+end
+# Stuff to do after forking a worker.
+Resque.before_first_fork do
+  ActiveRecord::Base.establish_connection
+end
+Resque.fork!
