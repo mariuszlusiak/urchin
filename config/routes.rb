@@ -28,7 +28,7 @@ Smsee::Application.routes.draw do
 
   resources :subscriptions
 
-    mount Resque::Server.new, :at => '/resque'
+    mount Resque::Server.new, :at => '/admin/resque'
 
   
   match 'profile' => 'users#show'

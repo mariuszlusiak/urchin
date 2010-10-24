@@ -1,7 +1,9 @@
 <%
 if @admin_message.id
+  # for edit
   url = "#{admin_message_path(@admin_message)}"
 else
+  # for new
   url = "#{admin_messages_path}"
 end
 %>

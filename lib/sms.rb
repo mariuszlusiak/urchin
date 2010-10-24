@@ -14,8 +14,8 @@ class Msg
 
   # The first delay will be 0 seconds, the 2nd will be 60 seconds, etc... Again, tweak to your own needs.
   # The number if retries is equal to the size of the backoff_strategy array, unless you set retry_limit yourself.
-  #             no delay, 1m, 10m,   1h,    3h,    6h
-  @backoff_strategy = [0, 60, 600, 3600, 10800, 21600]
+  #             no delay, 1m,  3m, 10m,   1h,    3h,    6h,   12h
+  @backoff_strategy = [0, 60, 180, 600, 3600, 10800, 21600, 43200]
   
   
   # Touch the link :) and add log it
