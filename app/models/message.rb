@@ -20,7 +20,7 @@ class Message < ActiveRecord::Base
 
   Ascii_text_limit = 320
   Unicode_text_limit = 140
-
+  
   # Returns the number of the messages would be sent
   def going_messages
     recipients.map(&:id).count * unit

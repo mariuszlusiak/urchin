@@ -9,12 +9,55 @@ class User < ActiveRecord::Base
   validates :name, presence:true
   validates :sender, presence:true #TODO add regex validation
 
+  Gateway_Errors = {
+    '0000'	=>	'Message not sent.',
+    '0005'	=>	'Invalid server',
+    '0010'	=>	'Username not provided.',
+    '0011'	=>	'Password not provided.',
+    '00'    =>	'Invalid username/password.',
+    '0020'	=>	'Insufficient Credits',
+    '0030'	=>	'Invalid Sender ID',
+    '0040'	=>	'Mobile number not provided.',
+    '0041'	=>	'Invalid mobile number.',
+    '0042'	=>	'Network not supported.',
+    '0050'	=>	'Invalid message.',
+    '0060'	=>	'Invalid quantity specified.',
+    '0066'	=>	'Network not supported',
+    :nil => 'pending'
+  }
+
+  def pending_messages
+    recipients.where(:response => nil)
+  end
+
+  def failed_messages
+    # 0000		Message not sent.
+    # 200304174210838 Message sent successfully.
+    # 0005		Invalid server
+    # 0010		Username not provided.
+    # 0011		Password not provided.
+    # 00		Invalid username/password.
+    # 0020		Insufficient Credits
+    # 0030		Invalid Sender ID
+    # 0040		Mobile number not provided.
+    # 0041		Invalid mobile number.
+    # 0042		Network not supported.
+    # 0050		Invalid message.
+    # 0060		Invalid quantity specified.
+    # 0066		Network not supported
+    #
+    # All errors IDS smaller than 100 that why  "recipients.response < 100"
+
+    #TODO need test
+    recipients.where("recipients.response < 100 OR recipients.response = ?",nil).limit(5).order("created_at DESC")
+  end
+
   #TODO Use Rails query syntax
   #TODO Improve the query it self
   #TODO Need text so badly
   def valid_and_ordered_by_last_less_subscriptions
     Subscription.find_by_sql(
-    "SELECT  `subscriptions`.*,DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) as end_date
+      "SELECT  `subscriptions`.*,DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) as end_date
     FROM  `subscriptions` 
     INNER JOIN `packages` ON `packages`.`id` = `subscriptions`.`package_id`
     WHERE DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) >= '#{Time.zone.now}'
@@ -40,9 +83,9 @@ class User < ActiveRecord::Base
   def sent_messages_count
     number_of_messages = 0
     valid_and_ordered_by_last_less_subscriptions.each do |subscription|
-       subscription.messages.each do |message|
-         number_of_messages += message.recipients.count * message.unit
-       end
+      subscription.messages.each do |message|
+        number_of_messages += message.recipients.count * message.unit
+      end
     end
     return number_of_messages
   end

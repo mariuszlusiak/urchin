@@ -23,6 +23,7 @@ class Msg
     
     # You can rise error here, if you want to keep the message in the queue
     # raise "Error Message wa wa wa wa hoh hoh oh ho"
+    
     # sending the message by HTTP
     response = Net::HTTP.get_response(host, path)
 
