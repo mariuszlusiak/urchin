@@ -8,4 +8,27 @@ class Recipient < ActiveRecord::Base
   # to prevent double check and to have better Error message for Invalid Mobile number
   # validates :mobile_number, :numericality => true, :presence => true
 
+  #TODO Errors like 00 ,0010 and 0011 should don't appear to normal user
+  Gateway_Errors = {
+    '0000'	=>	'Message not sent.',
+    '0005'	=>	'Invalid server',
+    '0010'	=>	'Username not provided.',
+    '0011'	=>	'Password not provided.',
+    '00'    =>	'Invalid username/password.',
+    '0020'	=>	'Insufficient Credits',
+    '0030'	=>	'Invalid Sender ID',
+    '0040'	=>	'Mobile number not provided.',
+    '0041'	=>	'Invalid mobile number.',
+    '0042'	=>	'Network not supported.',
+    '0050'	=>	'Invalid message.',
+    '0060'	=>	'Invalid quantity specified.',
+    '0066'	=>	'Network not supported',
+    nil => 'Pending' # this why I love Ruby
+
+  }
+
+  def status
+    response.to_i > 100 ? 'Sent successfully.' : Gateway_Errors[response]
+  end
+
 end

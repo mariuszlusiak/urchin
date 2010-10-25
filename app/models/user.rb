@@ -9,47 +9,34 @@ class User < ActiveRecord::Base
   validates :name, presence:true
   validates :sender, presence:true #TODO add regex validation
 
-  Gateway_Errors = {
-    '0000'	=>	'Message not sent.',
-    '0005'	=>	'Invalid server',
-    '0010'	=>	'Username not provided.',
-    '0011'	=>	'Password not provided.',
-    '00'    =>	'Invalid username/password.',
-    '0020'	=>	'Insufficient Credits',
-    '0030'	=>	'Invalid Sender ID',
-    '0040'	=>	'Mobile number not provided.',
-    '0041'	=>	'Invalid mobile number.',
-    '0042'	=>	'Network not supported.',
-    '0050'	=>	'Invalid message.',
-    '0060'	=>	'Invalid quantity specified.',
-    '0066'	=>	'Network not supported',
-    :nil => 'pending'
-  }
 
+  # Get the pending messages
+  # P.S. Not used yet and could be useless
   def pending_messages
     recipients.where(:response => nil)
   end
 
-  def failed_messages
-    # 0000		Message not sent.
-    # 200304174210838 Message sent successfully.
-    # 0005		Invalid server
-    # 0010		Username not provided.
-    # 0011		Password not provided.
-    # 00		Invalid username/password.
-    # 0020		Insufficient Credits
-    # 0030		Invalid Sender ID
-    # 0040		Mobile number not provided.
-    # 0041		Invalid mobile number.
-    # 0042		Network not supported.
-    # 0050		Invalid message.
-    # 0060		Invalid quantity specified.
-    # 0066		Network not supported
-    #
-    # All errors IDS smaller than 100 that why  "recipients.response < 100"
-
-    #TODO need test
-    recipients.where("recipients.response < 100 OR recipients.response = ?",nil).limit(5).order("created_at DESC")
+  # Gateway  Errors Numbers :)
+  # -------------------------------------------
+  # 0000		Message not sent.
+  # 200304174210838 Message sent successfully.
+  # 0005		Invalid server
+  # 0010		Username not provided.
+  # 0011		Password not provided.
+  # 00		Invalid username/password.
+  # 0020		Insufficient Credits
+  # 0030		Invalid Sender ID
+  # 0040		Mobile number not provided.
+  # 0041		Invalid mobile number.
+  # 0042		Network not supported.
+  # 0050		Invalid message.
+  # 0060		Invalid quantity specified.
+  # 0066		Network not supported
+  #
+  # All errors IDS smaller than 100 that why  "recipients.response < 100"
+  # P.S. NOt used yet
+  def not_sent_messages
+    recipients.where("recipients.response IS NULL OR recipients.response < 100")
   end
 
   #TODO Use Rails query syntax

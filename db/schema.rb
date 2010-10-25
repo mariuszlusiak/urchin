@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101021140254) do
+ActiveRecord::Schema.define(:version => 20101003203143) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(:version => 20101021140254) do
     t.string   "text"
     t.string   "sender",     :null => false
     t.boolean  "ascii"
+    t.integer  "unit",       :null => false
     t.integer  "user_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "unit"
   end
 
   add_index "messages", ["user_id"], :name => "index_messages_on_user_id"

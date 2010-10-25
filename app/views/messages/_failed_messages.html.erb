@@ -1,0 +1,19 @@
+
+<table>
+  <tr>
+    <th>Message text</th>
+    <th>Sent at</th>
+    <th>Status</th>
+    <th>To</th>
+  </tr>
+  <% @recipients.each do |recipient| %>
+  <tr>
+    
+    <td><%= recipient.message.text %></td>
+    <td><%= recipient.created_at %></td>
+    <td><%= recipient.status %></td>
+    <td><%= recipient.mobile_number %></td>
+  </tr>
+  <%end%>
+</table>
+<%= will_paginate @recipients %>

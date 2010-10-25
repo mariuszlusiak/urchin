@@ -6,7 +6,7 @@ class Msg
 
 
   # the Message will go to this queue if it failed
-  @queue = :retry_queue
+  @queue = :retry
 
   # Retry Specific Exceptions
   # only retry if a SocketError (or subclass) exception is thrown.

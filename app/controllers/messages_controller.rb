@@ -13,11 +13,16 @@ class MessagesController < ApplicationController
   end
 
 
-
   # GET /messages/new
   # GET /messages/new.xml
   def new
     @message = Message.new
+
+    # Show only 7 sent messages per page.
+    # P.S. Recipients are the actual messages.
+    @recipients = current_user.recipients.paginate :page =>  params[:page],
+      :per_page => 7,
+      :order => 'created_at DESC'
 
     respond_to do |format|
       format.html # new.html.erb
