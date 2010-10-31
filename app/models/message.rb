@@ -61,6 +61,7 @@ class Message < ActiveRecord::Base
     true
   end
 
+  # Return the unites of the message
   def number_of_units
     if ascii
       return  (text.length / Ascii_unit_lenght).ceil
