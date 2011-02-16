@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.1'
+gem 'rails', '3.0.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -18,6 +18,7 @@ gem 'will_paginate', '~> 3.0.beta'
 group :development, :test do
   gem 'rails-erd'
   gem 'ruby-debug19'
+  gem 'railroady'
 end
 
 
