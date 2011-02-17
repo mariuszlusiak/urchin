@@ -1,0 +1,10 @@
+.rvmrc
+.DS_Store
+log/*.log
+tmp/**/*
+db/*.sqlite3
+db-dumps
+config/database.yml
+**/.DS_Store
+.bundle
+nbproject/**/*
