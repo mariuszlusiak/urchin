@@ -8,3 +8,6 @@ config/database.yml
 **/.DS_Store
 .bundle
 nbproject/**/*
+.yardoc/**/*
+.yardoc
+nbproject
