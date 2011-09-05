@@ -82,7 +82,7 @@ class Sms
 
   def enqueue
     # Host name
-    host = 'www.it2sms.com'
+    host = 'www.thehttpsmsgateway.com'
 
     # Choose the encoding type
     @message.ascii ? (msg,mt = as_ascii,0) : (msg,mt = as_unicode,1)
@@ -92,8 +92,7 @@ class Sms
 
     # Iterates on each number in the array
     @message.recipients.each do |recipient|
-      path = "/sendsms/sendsms.asp?username=inet&password=inetsyria88212&mno=#{
-      recipient.mobile_number}&Msg=#{msg}&sid=#{@sender}&fl=0&mt=#{mt}&ipcl=91.144.8.199"
+      path = "/url/path/#{recipient.mobile_number}&Msg=#{msg}&sid=#{@sender}&fl=0&mt=#{mt}"
 
       # enqueue
       Resque::Job.create(queue, Msg, @message.id,@sender, host, path, recipient.id)
