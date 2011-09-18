@@ -1,4 +1,4 @@
-Smsee::Application.routes.draw do
+Urchin::Application.routes.draw do
 
   namespace :admin do
     resources :users do

@@ -3,7 +3,7 @@
         
 en:
   errors:
-    format: "{{attribute}} {{message}}"
+    format: "%{attribute} %{message}"
   hello: "Hello world"
   activerecord:
     attributes:

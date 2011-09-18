@@ -5,7 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 
-Smsee::Application.load_tasks
+Urchin::Application.load_tasks
 
 
 begin

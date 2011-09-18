@@ -3,7 +3,7 @@ class Message < ActiveRecord::Base
   has_many :recipients
 
   # Every message should have a sender :D
-  validates :user_id, presence:true 
+  validates :user_id, presence:true
   validates :recipients, presence:true
   validates :text, presence:true
   validates :sender, presence:true
@@ -31,26 +31,26 @@ class Message < ActiveRecord::Base
   #TODO need optimization user Global variables instead numbers in a configuration file
   def message_length
     if ascii
-      errors.add_to_base("Sorry long message, should be less than #{Ascii_text_limit} characters.") if text.length > Ascii_text_limit
+      errors.add(:base,"Sorry long message, should be less than #{Ascii_text_limit} characters.") if text.length > Ascii_text_limit
     else
-      errors.add_to_base("Sorry long message, should be less than #{Unicode_text_limit} characters.") if text.length > Unicode_text_limit
+      errors.add(:base,"Sorry long message, should be less than #{Unicode_text_limit} characters.") if text.length > Unicode_text_limit
     end
   end
 
   def valid_mobile_numbers?
     recipients.each do |recipient|
       unless recipient.mobile_number.match(/^\d+$/)
-        errors.add_to_base("#{recipient.mobile_number} is invalid mobile number")
+        errors.add(:base,"#{recipient.mobile_number} is invalid mobile number")
       end
     end
   end
 
   def today_limit
-    errors.add_to_base("Sorry, you are out of your daly limit.") if going_messages > user.today_limit
+    errors.add(:base,"Sorry, you are out of your daly limit.") if going_messages > user.today_limit
   end
   
   def amount_limit
-    errors.add_to_base("Sorry, you are out of your total messages limit.") if going_messages > user.amount_limit
+    errors.add(:base,"Sorry, you are out of your total messages limit.") if going_messages > user.amount_limit
   end
 
   # If your strings are Unicode (and they really should be, nowadays),

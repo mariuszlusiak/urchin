@@ -1,24 +1,41 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.1.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+
 
 gem 'mysql2'
 gem 'foreigner'
 gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
 gem 'nifty-generators'
 #gem 'delayed_job','2.1.0.pre2'
-gem 'resque','1.11.0' ,:git => 'http://github.com/defunkt/resque.git', :require => 'resque/server'
+gem 'resque' ,:git => 'http://github.com/defunkt/resque.git', :require => 'resque/server'
 gem 'resque-forker'
 gem 'resque-retry'
 gem 'will_paginate', '~> 3.0.beta'
+
+group :assets do
+  gem 'sass-rails', "~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+end
+
+gem 'jquery-rails'
+
 
 group :development, :test do
   gem 'rails-erd'
   gem 'ruby-debug19'
   gem 'railroady'
+  gem 'rspec-rails'
+  gem 'guard'
+  gem 'rb-inotify'
+  gem 'libnotify'
+  gem "factory_girl_rails", ">= 1.2.0"
+  gem 'spork', '~> 0.9.0.rc'
 end
 
 
