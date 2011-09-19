@@ -1,6 +1,9 @@
 class Recipient < ActiveRecord::Base
   belongs_to :message
   belongs_to :subscription
+  belongs_to :user
+
+  scope :user_recipients_of_today, lambda { |user| user.recipients.where('messages.created_at >= ? ', Date.today.beginning_of_day)}
 
   # This Validation is already exist in Message Model under the method :valid_mobile_numbers?
   # I choose to stope this validation rather than Message Model validation
@@ -23,7 +26,6 @@ class Recipient < ActiveRecord::Base
     '0060'	=>	'Invalid quantity specified.',
     '0066'	=>	'Network not supported',
     nil => 'Pending' # this why I love Ruby
-
   }
 
   def status

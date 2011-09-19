@@ -6,15 +6,10 @@ class User < ActiveRecord::Base
   has_many :packages, :through => :subscriptions
 
   acts_as_authentic
-  validates :name, presence:true
-  validates :sender, presence:true #TODO add regex validation
 
-
-  # Get the pending messages
-  # P.S. Not used yet and could be useless
-  def pending_messages
-    recipients.where(:response => nil)
-  end
+  
+  validates :name, :presence => true
+  validates :sender, :presence => true #TODO add regex validation
 
   # Gateway  Errors Numbers :)
   # -------------------------------------------
@@ -35,9 +30,9 @@ class User < ActiveRecord::Base
   #
   # All errors IDS smaller than 100 that why  "recipients.response < 100"
   # P.S. NOt used yet
-  def not_sent_messages
-    recipients.where("recipients.response IS NULL OR recipients.response < 100")
-  end
+  #def not_sent_messages
+  #  recipients.where("recipients.response IS NULL OR recipients.response < 100")
+  #end
 
   #ISSUE: should use scope
   #TODO Use Rails query syntax
@@ -54,9 +49,11 @@ class User < ActiveRecord::Base
   end
 
   # Returns the number of sent messages by this user for today
-  def sent_messages_for_today
-    recipients.where('messages.created_at >= ? ', Date.today.beginning_of_day).count
+  def sent_messages_for_today(user=self)
+    Recipient.user_recipients_of_today(user).count
+    #recipients.where('messages.created_at >= ? ', Date.today.beginning_of_day).count
   end
+
 
   # Returns the number of sent messages by this user for valid subscriptions only
   #TODO Could done by SQL only to be more faster
@@ -75,7 +72,7 @@ class User < ActiveRecord::Base
         number_of_messages += message.recipients.count * message.unit
       end
     end
-    return number_of_messages
+    number_of_messages
   end
 
   # Returns the fixed Day limit, this function add all day limits for this user
@@ -95,7 +92,7 @@ class User < ActiveRecord::Base
   def today_limit
     day_limit - sent_messages_for_today
   end
-  
+
 end
 # == Schema Information
 #

@@ -1,4 +1,4 @@
-# A sample Guardfile
+# Guardfile
 # More info at https://github.com/guard/guard#readme
 
 guard 'bundler' do
@@ -21,6 +21,17 @@ guard 'livereload' do
   watch(%r{config/locales/.+\.yml})
 end
 
+group 'Logger' do
+  f = 'log/message.log'
+  watch(f) {
+    @@old_n ||= 0
+    n = (`wc -l < #{f}`).to_i
+    `notify-send -u critical  'Boss !!' "(#{n- @@old_n}) Message has been sent!" `
+    @@old_n = (`wc -l #{f}`).to_i
+  }
+end
+
+
 guard 'rspec', :version => 2 do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
@@ -38,6 +49,7 @@ guard 'rspec', :version => 2 do
   # Capybara request specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
   watch('spec/factories.rb')                          { "spec/factories.rb" }
+  watch(%r{spec/fixtures/(.+)\.yml}) { "spec/" }
 end
 
 

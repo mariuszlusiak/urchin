@@ -6,7 +6,7 @@ cd /path/to/redis
 PREFIX=/path/to/redis rake redis:start
 
 # Starting Resque
-COUNT=5 QUEUE=* rake environment resque:workers
+COUNT=2 QUEUE=* rake environment resque:workers
 
 # Starting scheduler
 rake resque:scheduler
@@ -15,3 +15,5 @@ rake resque:scheduler
 bundle exec annotate --exclude tests,fixtures
 
 
+# Import fixtures from Database
+rake db:extract_fixtures FIXTURES=messages,packages,recipients,subscriptions,users

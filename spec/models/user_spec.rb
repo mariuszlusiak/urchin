@@ -7,6 +7,13 @@ describe User do
 
   end
 
+  context "Fixtures" do
+    it "should load users fixtures" do
+      u = users(:user_001)
+      u.should_not be_nil
+      u.should be_kind_of(User)
+    end
+  end
 
   context "Associations" do
     it { should have_many(:messages) }
@@ -14,6 +21,16 @@ describe User do
 
     it { should have_many(:subscriptions) }
     it { should have_many(:packages).through(:subscriptions) }
+  end
+
+  context "Scopes" do
+
+    it "Should retrieve " do
+      u = users(:user_001)
+       u.packages[0].should be_kind_of(Package)
+    end
+
+
   end
 
   context "Validation" do
