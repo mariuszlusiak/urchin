@@ -1,12 +1,11 @@
 class Recipient < ActiveRecord::Base
   belongs_to :message
-  belongs_to :user
   belongs_to :subscription
 
   # This Validation is already exist in Message Model under the method :valid_mobile_numbers?
   # I choose to stope this validation rather than Message Model validation
   # to prevent double check and to have better Error message for Invalid Mobile number
-  # validates :mobile_number, :numericality => true, :presence => true
+  #validates :mobile_number, :numericality => true, :presence => true
 
   #TODO Errors like 00 ,0010 and 0011 should don't appear to normal user
   Gateway_Errors = {
@@ -32,3 +31,18 @@ class Recipient < ActiveRecord::Base
   end
 
 end
+# == Schema Information
+#
+# Table name: recipients
+#
+#  id              :integer(4)      not null, primary key
+#  mobile_number   :string(255)     not null
+#  response        :string(255)
+#  message_id      :integer(4)      not null
+#  subscription_id :integer(4)      not null
+#  sent_at         :datetime
+#  received_at     :datetime
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+

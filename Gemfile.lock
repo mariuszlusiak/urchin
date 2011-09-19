@@ -7,6 +7,12 @@ GIT
       activerecord (>= 3.0.7)
 
 GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: cfeec96c9ca0fa5035b10be3d73e798cc4fc52f7
+  specs:
+    annotate (2.4.1.beta1)
+
+GIT
   remote: http://github.com/defunkt/resque.git
   revision: 11f3fac890a5ef7e0087667cfa400bc036fd03da
   specs:
@@ -167,6 +173,7 @@ GEM
       actionpack (~> 3.1.0)
       railties (~> 3.1.0)
       sass (>= 3.1.4)
+    shoulda-matchers (1.0.0.beta3)
     sinatra (1.2.6)
       rack (~> 1.1)
       tilt (< 2.0, >= 1.2.2)
@@ -192,6 +199,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate (= 2.4.1.beta1)!
   authlogic!
   coffee-rails (~> 3.1.0)
   factory_girl_rails (>= 1.2.0)
@@ -211,6 +219,7 @@ DEPENDENCIES
   rspec-rails
   ruby-debug19
   sass-rails (~> 3.1.0)
+  shoulda-matchers
   spork (~> 0.9.0.rc)
   uglifier
   will_paginate (~> 3.0.beta)

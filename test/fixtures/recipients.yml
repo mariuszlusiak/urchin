@@ -9,3 +9,18 @@ two:
   mobile_number: 1
   message: 
   received_at: 2010-09-19 12:27:30
+# == Schema Information
+#
+# Table name: recipients
+#
+#  id              :integer(4)      not null, primary key
+#  mobile_number   :string(255)     not null
+#  response        :string(255)
+#  message_id      :integer(4)      not null
+#  subscription_id :integer(4)      not null
+#  sent_at         :datetime
+#  received_at     :datetime
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+

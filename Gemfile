@@ -5,8 +5,6 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
-
 gem 'mysql2'
 gem 'foreigner'
 gem 'authlogic', :git => 'git://github.com/binarylogic/authlogic.git'
@@ -25,17 +23,19 @@ end
 
 gem 'jquery-rails'
 
-
 group :development, :test do
   gem 'rails-erd'
   gem 'ruby-debug19'
   gem 'railroady'
   gem 'rspec-rails'
+  gem "shoulda-matchers"
   gem 'guard'
   gem 'rb-inotify'
   gem 'libnotify'
   gem "factory_girl_rails", ">= 1.2.0"
   gem 'spork', '~> 0.9.0.rc'
+  gem 'annotate', '2.4.1.beta1',:git => 'git://github.com/ctran/annotate_models.git'
+
 end
 
 

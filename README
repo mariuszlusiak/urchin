@@ -1,5 +1,6 @@
 
-
+# Install redis
+ 
 # Starting redis database
 cd /path/to/redis
 PREFIX=/path/to/redis rake redis:start
@@ -9,4 +10,8 @@ COUNT=5 QUEUE=* rake environment resque:workers
 
 # Starting scheduler
 rake resque:scheduler
+
+# Add a comment summarizing the current schema
+bundle exec annotate --exclude tests,fixtures
+
 

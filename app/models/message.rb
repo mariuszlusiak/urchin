@@ -13,6 +13,7 @@ class Message < ActiveRecord::Base
   validate  :valid_mobile_numbers?
   validate  :message_length
 
+  
   # Must be float so number_of_units method can work
   Ascii_unit_lenght = 160.0
   Unicode_unit_lenght = 70.0
@@ -20,8 +21,10 @@ class Message < ActiveRecord::Base
 
   Ascii_text_limit = 320
   Unicode_text_limit = 140
+
+
   
-  # Returns the number of the messages would be sent
+  # Returns the number of the messages (units) would be sent
   def going_messages
     recipients.map(&:id).count * unit
   end
@@ -70,3 +73,17 @@ class Message < ActiveRecord::Base
     end
   end
 end
+# == Schema Information
+#
+# Table name: messages
+#
+#  id         :integer(4)      not null, primary key
+#  text       :string(255)
+#  sender     :string(255)     not null
+#  ascii      :boolean(1)
+#  unit       :integer(4)      not null
+#  user_id    :integer(4)      not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
