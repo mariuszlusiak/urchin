@@ -1,6 +1,6 @@
 rvm:
   - "1.9.2"
 script:
-  - "bundle exec rake db:migrate spec"
+  - "bundle exec rake db:create db:migrate spec"
 env:
   - DB=mysql
