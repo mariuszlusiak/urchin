@@ -1,5 +1,5 @@
 before_script:
-  - "mysql -e 'create database urchin_test;' >/dev/null"
+  - "mysql -e 'create database urchin_test;'
 rvm:
   - "1.9.2"
 script:
