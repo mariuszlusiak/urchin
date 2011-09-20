@@ -1,6 +1,14 @@
+before_script:
+  - "mysql -e 'create database urchin_test;' >/dev/null"
 rvm:
   - "1.9.2"
 script:
   - "bundle exec rake db:create db:migrate spec"
 env:
   - DB=mysql
+
+branches:
+  only:
+    - 'master'
+
+bundler_args: "--without development production"
