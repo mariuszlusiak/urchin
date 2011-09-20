@@ -1,3 +1,23 @@
+1- In the new version of my program I used the old hash tag style instead of the new one in order to be compatible with the Ruby 1.8.7.
+
+2- I used shorter methods as they are easier to read, maintain and test.
+
+3- I changed the logic of the billing system solving the problem of the package's change (in the old version changing the package effected the old users)
+
+4- I wrote tests (better late than never).
+
+5- I upgraded the application from Rails 3.0.3 to 3.1
+
+
+Things to do:
+-Use Cronjob to set units in users accounts.
+-Improve README.
+-Write comments in Rdoc style.
+-Use Devise instead of Authlogic, because Devise has bigger community and they improve it more often.
+
+
+
+How to Run:
 
 # Install redis
  
@@ -11,9 +31,13 @@ COUNT=2 QUEUE=* rake environment resque:workers
 # Starting scheduler
 rake resque:scheduler
 
-# Add a comment summarizing the current schema
-bundle exec annotate --exclude tests,fixtures
 
 
+
+
+Extra tasks:
 # Import fixtures from Database
 rake db:extract_fixtures FIXTURES=messages,packages,recipients,subscriptions,users
+
+# Add a comment summarizing the current schema
+bundle exec annotate --exclude tests,fixtures
