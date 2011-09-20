@@ -12,7 +12,7 @@ development:
   database: urchin_development
   pool: 5
   username: root
-  password: root
+  password: 
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -25,7 +25,7 @@ test:
   database: urchin_test
   pool: 5
   username: root
-  password: root
+  password:
   socket: /var/run/mysqld/mysqld.sock
 
 production:
@@ -35,6 +35,6 @@ production:
   database: urchin_production
   pool: 5
   username: root
-  password: root
+  password:
   socket: /var/run/mysqld/mysqld.sock
 
