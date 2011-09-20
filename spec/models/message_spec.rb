@@ -6,20 +6,20 @@ describe Message do
     it { should belong_to(:user) }
     it { should have_many(:recipients) }
   end
+  unless ENV['TRAVIS']
 
-  context "Sending message" do
-    f = "#{Rails.root}/log/message.log"
-    it "should send message" do
-      f = "#{Rails.root}/log/message.log"
-      sent_messages_number = %x[wc -l < #{f}].to_i
-      m = messages(:message_001)
-      Sms.new(m)
-      sleep (5.seconds)
-      new_sent_messages_number = %x[wc -l < #{f}].to_i - m.recipients.count
-      new_sent_messages_number.should == sent_messages_number
+    context "Sending message" do
+      it "should send message" do
+        f = "#{Rails.root}/log/message.log"
+        sent_messages_number = %x[wc -l < #{f}].to_i
+        m = messages(:message_001)
+        Sms.new(m)
+        sleep (5.seconds)
+        new_sent_messages_number = %x[wc -l < #{f}].to_i - m.recipients.count
+        new_sent_messages_number.should == sent_messages_number
+      end
     end
   end
-
 
   context "Validation" do
 
