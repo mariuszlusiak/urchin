@@ -1,5 +1,6 @@
 before_script:
   - "mysql -e 'create database urchin_test;' >/dev/null"
+  - ""
 rvm:
   - "1.9.2"
 script:
@@ -10,4 +11,8 @@ env:
 branches:
   only:
     - 'master'
-
+mysql:
+  adapter: mysql2
+  database: urchin_test
+  username:
+  encoding: utf8
