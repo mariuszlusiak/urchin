@@ -4,7 +4,6 @@ class CreateRecipients < ActiveRecord::Migration
       t.string :mobile_number,  null:false
       t.string :response
       t.references :message, null:false
-      t.references :subscription, null:false
       t.datetime :sent_at
       t.datetime :received_at
 

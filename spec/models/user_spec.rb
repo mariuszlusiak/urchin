@@ -7,6 +7,7 @@ describe User do
 
   end
 
+
   context "Fixtures" do
     it "should load users fixtures" do
       u = users(:user_001)
@@ -23,12 +24,45 @@ describe User do
     it { should have_many(:packages).through(:subscriptions) }
   end
 
-  context "Scopes" do
+  context "Methods" do
 
     it "Should retrieve " do
       u = users(:user_001)
-       u.packages[0].should be_kind_of(Package)
+      u.packages[0].should be_kind_of(Package)
     end
+
+    #it "should calculate today_limit for user" do
+    #  u = users(:user_001)
+    #  recipient_number = u.recipients.where('messages.created_at >= ? ', messages(:message_001).created_at.beginning_of_day).count
+    #  today_limit = u.daily_limit - recipient_number
+    #  u.today_limit.should == today_limit
+    #end
+
+    it "should give back user units" do
+      u = users(:user_001)
+      u.units_limit.should == u.units
+    end
+
+    it "should subtract sent units from user units" do
+      u = users(:user_001)
+      m = messages(:message_003)
+      r = m.recipients[0]
+      old_units = u.units
+      u.minus_units(r)
+      u.units.should == old_units - m.unit
+    end
+
+    it "should subtract sent units from user daily_limit" do
+      u = users(:user_001)
+      m = messages(:message_003)
+      r = m.recipients[0]
+      old_daily_limit = u.daily_limit
+      u.minus_daily_limit(r)
+      u.daily_limit.should == old_daily_limit - m.unit
+    end
+
+
+
 
 
   end
@@ -48,8 +82,14 @@ describe User do
 
 
     subject { @empty_user = User.new }
+    %w(daily_limit units validity).each do |attr|
+      it "#{attr} should be 0" do
+        u = User.new
+        u.method(attr).call.should == 0
+      end
+    end
 
-    %w(name login email sender password).each do |field|
+    %w(name login email sender password daily_limit units validity).each do |field|
       it "should have #{field} field" do
         should respond_to(field)
       end
@@ -65,34 +105,6 @@ describe User do
   end
 
 
-  #it "should not create a person without last name" do
-  #  p = Person.create(@no_last_name)
-  #  p.valid?
-  #  p.errors[:last_name].should_not be_nil
-  #end
-
-  #
-  #it "should not create a person with empty first name" do
-  #  p = Person.new(:first_name => '',:last_name => 'Janas')
-  #  p.first_name.should be_blank
-  #  p.should_not be_valid
-  #  p.errors[:first_name].should_not be_blank
-  #end
-  #
-  #
-  #describe "Associations" do
-  #  subject { Factory(:person) }
-  #  it { should respond_to :messages }
-  #  it { should respond_to :addresses }
-  #
-  #
-  #  it "can retrieve a massage" do
-  #    m = Factory(:message)
-  #    p = m.recipient
-  #    p.messages.should == [m]
-  #  end
-  #
-  #end
 end
 # == Schema Information
 #
@@ -115,136 +127,9 @@ end
 #  last_login_at       :datetime
 #  current_login_ip    :string(255)
 #  last_login_ip       :string(255)
+#  daily_limit         :integer(4)      default(0)
+#  units               :integer(4)      default(0)
+#  validity            :integer(4)      default(0)
 #  created_at          :datetime
 #  updated_at          :datetime
 #
-
-#describe Message do
-#  describe "Validations" do
-#    before do
-#      @m = Message.new
-#      @m.should_not be_valid
-#    end
-#
-#    %w(sender recipient subject).each do |attr|
-#      it "must have #{attr}" do
-#        @m.errors[attr].should_not be_nil
-#      end
-#
-#    end
-#  end
-#
-#  describe "Associations" do
-#    it "must belongs to sender" do
-#      Message.new.should respond_to(:sender)
-#      end
-#
-#    it "must belongs to recipient" do
-#      Message.new.should respond_to(:recipient)
-#    end
-#
-#    it "can retrieve a sender and that is a Person object" do
-#      msg = Factory(:message)
-#      msg.sender.should_not be_nil
-#      msg.sender.should be_kind_of(Person)
-#
-#    end
-#
-#  end
-#end
-#describe Address do
-#  before do
-#
-#
-#    @person = Person.create!(
-#        {
-#            :first_name => "Samer",
-#            :last_name => "Jazaerly"
-#        }
-#    )
-#
-#
-#    @address_without_country ={
-#        :street => "street name",
-#        :city => "City Name",
-#        :zip => "123456",
-#        :person_id => @person.id
-#    }
-#
-#  end
-#
-#
-#  subject { Factory(:address) }
-#
-#  [:street, :city, :zip, :person_id, :state].each do |field|
-#    it "should have #{field} field" do
-#      should respond_to(field)
-#    end
-#  end
-#
-#  it "when state is 2-letter" do
-#    subject.state = "CA"
-#    should be_valid
-#  end
-#
-#  it "when state is more than 2" do
-#    subject.state = "CACA"
-#    should_not be_valid
-#  end
-#
-#  it "when state is blank" do
-#    subject.state = ''
-#    subject.should be_valid
-#  end
-#
-#  it "when state is less than 2" do
-#    subject.state = 'C'
-#    should_not be_valid
-#  end
-#
-#  it "when country is USA and state is empty" do
-#    subject.country = "USA"
-#    subject.state = ''
-#    should_not be_valid
-#  end
-#
-#  it "when country is not USA and state is empty" do
-#    subject.country = "syria"
-#    subject.state = ''
-#    should be_valid
-#  end
-#
-#
-#
-#
-#
-#
-#  context "Validations" do
-#
-#
-#    it "must create new address" do
-#      lambda {
-#        (Factory(:address)).save
-#      }.should change { Address.count }.by(1)
-#    end
-#
-#    [:street, :city, :zip].each do |attr|
-#      it "must have a #{attr}" do
-#        a = Address.new
-#        a.should_not be_valid
-#        a.errors[attr].should_not be_blank
-#      end
-#    end
-#
-#    it "must set default country 'Syria' if the country is missing" do
-#      a = Factory(:address)
-#      a.country = ''
-#      a.country.should be_blank
-#      a.save!
-#      a.country.should == 'Syria'
-#    end
-#
-#
-#  end
-#
-#end

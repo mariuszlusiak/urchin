@@ -1,28 +1,31 @@
 ---
 message_001:
   id: 1
-  text: a
-  sender: '123456789'
+  text: ! 'Message text Message text Message text Message text Message text '
+  sender: '00998877665511'
   ascii: 1
   unit: 1
-  user_id: 3
-  created_at: 2011-09-19 11:12:15.000000000Z
-  updated_at: 2011-09-19 11:12:15.000000000Z
+  user_id: 1
+  created_at: 2011-09-19 22:33:15.000000000Z
+  updated_at: 2011-09-19 22:33:15.000000000Z
 message_002:
   id: 2
-  text: '11'
-  sender: '123456789'
+  text: '1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
+  sender: '00998877665511'
   ascii: 1
   unit: 1
-  user_id: 3
-  created_at: 2011-09-19 11:20:57.000000000Z
-  updated_at: 2011-09-19 11:20:57.000000000Z
+  user_id: 1
+  created_at: 2011-09-19 23:40:27.000000000Z
+  updated_at: 2011-09-19 23:40:27.000000000Z
 message_003:
   id: 3
-  text: '22'
-  sender: '123456789'
+  text: ! "You can send 9 messages for today, and you have 400 Messages\r\nYou have
+    160 if English or 70 if Arabic characters remaining for your Message\r\nMessage
+    text You can send 9 messages for today, and you have 400 Messages\r\nYou have
+    160 if English or 70 if Arabic"
+  sender: '00998877665511'
   ascii: 1
-  unit: 1
-  user_id: 3
-  created_at: 2011-09-19 11:21:06.000000000Z
-  updated_at: 2011-09-19 11:21:06.000000000Z
+  unit: 2
+  user_id: 1
+  created_at: 2011-09-20 00:09:00.000000000Z
+  updated_at: 2011-09-20 00:09:00.000000000Z

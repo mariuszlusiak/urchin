@@ -27,11 +27,14 @@ task "resque:setup" => :environment do
   print ' Done.'
 end
 
+task :install => ["db:create","db:migrate"]
+task :uninstall => ["db:drop"]
+task :reinstall => ["uninstall","install"]
+
 
 namespace :db do
   desc 'Create YAML test fixtures from data in an existing database.
   Defaults to development database. Set RAILS_ENV to override.'
-
   task :extract_fixtures => :environment do
     sql = "SELECT * FROM %s"
     skip_tables = ["schema_info", "sessions"]

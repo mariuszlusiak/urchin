@@ -7,9 +7,34 @@ class User < ActiveRecord::Base
 
   acts_as_authentic
 
-  
   validates :name, :presence => true
   validates :sender, :presence => true #TODO add regex validation
+  
+
+  # Returns the number of sent messages by this user today.
+  # Not used now
+  #def sent_messages_for_today(user=self)
+  #  Recipient.user_recipients_of_today(user).count
+  #end
+
+
+
+  def today_limit
+    self.daily_limit
+  end
+  
+  def units_limit
+    self.units
+  end
+
+  def minus_units(recipient)
+    self.update_attribute(:units,self.units - recipient.message.unit)
+  end
+
+  def minus_daily_limit(recipient)
+    self.update_attribute(:daily_limit,self.daily_limit - recipient.message.unit)
+  end
+
 
   # Gateway  Errors Numbers :)
   # -------------------------------------------
@@ -34,64 +59,6 @@ class User < ActiveRecord::Base
   #  recipients.where("recipients.response IS NULL OR recipients.response < 100")
   #end
 
-  #ISSUE: should use scope
-  #TODO Use Rails query syntax
-  #TODO Improve the query it self
-  #TODO Need text so badly
-  def valid_and_ordered_by_last_less_subscriptions
-    Subscription.find_by_sql(
-      "SELECT  `subscriptions`.*,DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) as end_date
-    FROM  `subscriptions` 
-    INNER JOIN `packages` ON `packages`.`id` = `subscriptions`.`package_id`
-    WHERE DATE_ADD(`subscriptions`.created_at, INTERVAL `packages`.validity DAY) >= '#{Time.zone.now}'
-    AND `subscriptions`.`user_id` = #{id}
-    ORDER BY end_date;")
-  end
-
-  # Returns the number of sent messages by this user for today
-  def sent_messages_for_today(user=self)
-    Recipient.user_recipients_of_today(user).count
-    #recipients.where('messages.created_at >= ? ', Date.today.beginning_of_day).count
-  end
-
-
-  # Returns the number of sent messages by this user for valid subscriptions only
-  #TODO Could done by SQL only to be more faster
-  #TODO make unit test for this function
-  #TODO Need text so badly
-  # Algorithm
-  # - bring valid subscriptions
-  # - bring the messages for each subscriptions through user
-  # - count the number of recipient of each message and multiplex it with same message unit
-  # - return the total.
-  # could be like valid_and_ordered_by_last_less_subscriptions.each {|s| s.messages.uniq.each {|m| p m.recipients.count * m.unit}}
-  def sent_messages_count
-    number_of_messages = 0
-    valid_and_ordered_by_last_less_subscriptions.each do |subscription|
-      subscription.messages.each do |message|
-        number_of_messages += message.recipients.count * message.unit
-      end
-    end
-    number_of_messages
-  end
-
-  # Returns the fixed Day limit, this function add all day limits for this user
-  # subscriptions
-  #TODO don't count the expired subscriptions
-  def day_limit
-    packages.map(&:day_limit).sum
-  end
-
-  # Returns total amount limit for this user
-  def amount_limit
-    #TODO it must be only the valid (unexpired) subscriptions for this user
-    packages.map(&:amount).sum - sent_messages_count
-  end
-
-  # Returns the final limit for today by counting sent messages for today
-  def today_limit
-    day_limit - sent_messages_for_today
-  end
 
 end
 # == Schema Information
@@ -115,6 +82,9 @@ end
 #  last_login_at       :datetime
 #  current_login_ip    :string(255)
 #  last_login_ip       :string(255)
+#  daily_limit         :integer(4)      default(0)
+#  units               :integer(4)      default(0)
+#  validity            :integer(4)      default(0)
 #  created_at          :datetime
 #  updated_at          :datetime
 #

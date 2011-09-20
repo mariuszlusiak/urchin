@@ -2,11 +2,12 @@
 
 
 <% if current_user %>
-<p>You can send  <%= current_user.today_limit   %> messages for today, and you have <%= current_user.amount_limit  %> Messages </p>
+<p>You can send  <%= current_user.today_limit   %> messages for today, and you have <%= current_user.units_limit  %> Messages </p>
 <p><%= link_to 'Send message', new_path %></p>
 <p><%= link_to 'Profile Management', edit_profile_path %></p>
-<p><%= link_to 'Show Profile', profile_path %></p>
+<p><%= link_to 'Show profile', profile_path %></p>
 <p><%= link_to 'New subscription', new_subscription_path %></p>
+<p><%= link_to 'New package', new_admin_package_path %></p>
 <p><%= link_to 'Logout',logout_path %></p>
 <%else%>
 <p><%= link_to 'Send message', new_path %></p>

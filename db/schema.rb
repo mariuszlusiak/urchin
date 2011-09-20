@@ -36,10 +36,9 @@ ActiveRecord::Schema.define(:version => 20101003203143) do
   end
 
   create_table "recipients", :force => true do |t|
-    t.string   "mobile_number",   :null => false
+    t.string   "mobile_number", :null => false
     t.string   "response"
-    t.integer  "message_id",      :null => false
-    t.integer  "subscription_id", :null => false
+    t.integer  "message_id",    :null => false
     t.datetime "sent_at"
     t.datetime "received_at"
     t.datetime "created_at"
@@ -83,6 +82,9 @@ ActiveRecord::Schema.define(:version => 20101003203143) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.integer  "daily_limit",         :default => 0
+    t.integer  "units",               :default => 0
+    t.integer  "validity",            :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

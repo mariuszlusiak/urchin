@@ -1,5 +1,5 @@
 <h1>New message</h1>
-<div>You can send  <%= current_user.today_limit   %> messages for today, and you have <%= current_user.amount_limit  %> Messages </div>
+<div>You can send  <%= current_user.today_limit   %> messages for today, and you have <%= current_user.units_limit  %> Messages </div>
 <div>You have <b><span id='myCounter'>160 if English or 70 if Arabic</span></b> characters remaining for your Message</div>
 <%= render 'form' %>
 <%= render 'sent_messages' unless  @recipients.nil? %>

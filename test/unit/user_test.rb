@@ -27,6 +27,9 @@ end
 #  last_login_at       :datetime
 #  current_login_ip    :string(255)
 #  last_login_ip       :string(255)
+#  daily_limit         :integer(4)      default(0)
+#  units               :integer(4)      default(0)
+#  validity            :integer(4)      default(0)
 #  created_at          :datetime
 #  updated_at          :datetime
 #

@@ -1,9 +1,10 @@
 class Recipient < ActiveRecord::Base
+  after_save :minus_units,:minus_daily_limit
   belongs_to :message
-  belongs_to :subscription
   belongs_to :user
 
   scope :user_recipients_of_today, lambda { |user| user.recipients.where('messages.created_at >= ? ', Date.today.beginning_of_day)}
+  scope :recipients_of_message, lambda { |message| message.recipients }
 
   # This Validation is already exist in Message Model under the method :valid_mobile_numbers?
   # I choose to stope this validation rather than Message Model validation
@@ -30,6 +31,14 @@ class Recipient < ActiveRecord::Base
 
   def status
     response.to_i > 100 ? 'Sent successfully.' : Gateway_Errors[response]
+  end
+
+  def minus_units
+    self.message.user.minus_units self
+  end
+
+  def minus_daily_limit
+    self.message.user.minus_daily_limit self
   end
 
 end

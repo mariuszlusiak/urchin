@@ -27,6 +27,9 @@ RSpec.configure do |config|
 
   # Load all fixtures, all the time
   config.global_fixtures = :all
+
+  config.use_transactional_examples = true
+
 end
 
 

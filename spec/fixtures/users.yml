@@ -1,21 +1,24 @@
 ---
 user_001:
-  id: 3
-  name: Amer
-  login: amer
-  email: amer.jazaerly@gmail.com
-  sender: '123456789'
-  crypted_password: 13e69279a6613bdbc7902df335359173d17dc77d5e2b03c0eb85f4457a93e687cd2ac78a14b4f5edad211173980e3376b3033af3355828123bb939be6da4ffe3
-  password_salt: O8atZnEiVYmZiX4TW9
-  persistence_token: f7a540bb8c0406a411aa5a0de90c3d513ca85dc54521b375aff47384f511fa254e700facd698009fa69826e08c5a3959ab4a326dca74b8a25c244dd470caedd8
-  single_access_token: WON8IMCbWDKwCEsEHsQu
-  perishable_token: eZ0JrnjaWB7l2fu0dONi
+  id: 1
+  name: Test User
+  login: test
+  email: test@test.com
+  sender: '00998877665511'
+  crypted_password: 5b867b31ec31b46f701e6ae3f546532c03d2f61e924a866740f1d29ed5881c3e4f2db846422a8abc8b031a958a88e6bf2a39c274227146ad5f49600ac202ba33
+  password_salt: Mt2pVr65iGiWuNGjyXce
+  persistence_token: 4e606026e04580aaaac25ee6b4d94b3c3104da82a740368fb0c7eebf776bc6cda5230449b84cb70b8d5c7d48c374d797ef445671fc376ef9c31accfe0712f930
+  single_access_token: KWkgdwpI4BnxKXqmi94
+  perishable_token: mNCX1JeyzLjVWo20XE5h
   login_count: 1
   failed_login_count: 0
-  last_request_at: 2011-09-19 11:46:41.000000000Z
-  current_login_at: 2011-09-19 11:10:52.000000000Z
+  last_request_at: 2011-09-20 00:09:08.000000000Z
+  current_login_at: 2011-09-19 22:30:58.000000000Z
   last_login_at: !!null 
   current_login_ip: 127.0.0.1
   last_login_ip: !!null 
-  created_at: 2011-09-19 11:10:52.000000000Z
-  updated_at: 2011-09-19 11:46:41.000000000Z
+  daily_limit: 15
+  units: 400
+  validity: 200
+  created_at: 2011-09-19 22:30:58.000000000Z
+  updated_at: 2011-09-20 00:09:08.000000000Z
