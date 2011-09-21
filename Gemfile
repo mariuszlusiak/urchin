@@ -23,9 +23,10 @@ end
 
 gem 'jquery-rails'
 
+gem 'ruby-debug19', :group => :development
+
 group :development, :test do
   gem 'rails-erd'
-  gem 'ruby-debug19'
   gem 'railroady'
   gem 'rspec-rails'
   gem "shoulda-matchers"
@@ -35,7 +36,6 @@ group :development, :test do
   gem "factory_girl_rails", ">= 1.2.0"
   gem 'spork', '~> 0.9.0.rc'
   gem 'annotate', '2.4.1.beta1',:git => 'git://github.com/ctran/annotate_models.git'
-
 end
 
 

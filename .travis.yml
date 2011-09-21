@@ -6,12 +6,6 @@ script:
   - "bundle exec rake db:create db:migrate spec"
 env:
   - DB=mysql
-
 branches:
   only:
     - 'master'
-mysql:
-  adapter: mysql2
-  database: urchin_test
-  username:
-  encoding: utf8
