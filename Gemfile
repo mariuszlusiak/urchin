@@ -38,6 +38,11 @@ group :development, :test do
   gem 'annotate', '2.4.1.beta1',:git => 'git://github.com/ctran/annotate_models.git'
 end
 
+group :test do
+  gem 'capybara'
+  gem 'launchy'
+end
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
